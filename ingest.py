@@ -17,7 +17,7 @@ BOILERPLATE = [
 ]
 
 
-# function for extarcting pdf in to text
+# function for extracting pdf in to text
 def extract_pages(path: str) -> list[tuple[int, str]]:
     reader = PdfReader(path)
     pages = []
@@ -89,20 +89,3 @@ def build_chunks(path:str) -> list[dict]:
                 "token_count": count_tokens(content),
             })
     return result
-        
-
-
-
-
-
-if __name__ == '__main__':
-    chunks = build_chunks("fastapi.pdf")
-    print(f"{len(chunks)} chunks")
-
-    sizes = []
-    for chunk in chunks:
-        sizes.append(chunk["token_count"])
-    print(f"tokens: min {min(sizes)}, max {max(sizes)}, avg {sum(sizes) // len(sizes)}")
-
-    print(f"\n{chunks[0]['page']} | {chunks[0]['heading']}")
-    print(chunks[0]["content"][:200])
